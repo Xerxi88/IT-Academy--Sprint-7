@@ -3,7 +3,7 @@ import styled from "styled-components";
 const stylePanell = styled.div`
     margin:20px;
     padding: 30px 0px;
-    width: 350px;
+    width: 300px;
     height: 10vh;
     display: flex;
     flex-direction: column;
