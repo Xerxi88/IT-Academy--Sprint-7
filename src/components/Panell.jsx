@@ -2,9 +2,15 @@ import React, { useState, useEffect } from "react";
 import StylePanell from "./style-component";
 import Botons from "./Botons";
 
-const Panell = ({ setPrecioTotal }) => {
-  const [pagines, setPagines] = useState("");
-  const [idiomes, setIdiomes] = useState("");
+
+const Panell = ({ setPrecioTotal,total }) => {
+  const [pagines, setPagines] = useState(window.localStorage.getItem("pagines"));
+  const [idiomes, setIdiomes] = useState(window.localStorage.getItem("idiomes"));
+
+  window.localStorage.setItem("pagines",pagines);
+  window.localStorage.setItem("idiomes",idiomes);
+  
+  
 
   const asignarPagines = (e) => {//Evita que se pueda escribir numeros en negativo en el input
     if (e.target.value <= 0) {
