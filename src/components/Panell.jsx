@@ -3,37 +3,37 @@ import StylePanell from "./style-component";
 import Botons from "./Botons";
 
 
-const Panell = ({ setPrecioTotal,total }) => {
-  const [pagines, setPagines] = useState(window.localStorage.getItem("pagines"));
-  const [idiomes, setIdiomes] = useState(window.localStorage.getItem("idiomes"));
+const Panell = ({ setPreu }) => {
+
+  const [pagines, setPagines] = useState(Number(window.localStorage.getItem("pagines")))
+  const [idiomes, setIdiomes] = useState(Number(window.localStorage.getItem("idiomes")))
 
   window.localStorage.setItem("pagines",pagines);
   window.localStorage.setItem("idiomes",idiomes);
   
-  
+  useEffect(()=>{
+    calcular();
+  },[pagines,idiomes]);
 
-  const asignarPagines = (e) => {//Evita que se pueda escribir numeros en negativo en el input
+  const calcular=()=>{
+    setPreu((pagines+idiomes)*30);
+  }
+
+  const asignarPagines = (e) => {
     if (e.target.value <= 0) {
-      setPagines("");
+      setPagines(0);
     } else {
       setPagines(e.target.value);
     }
   };
-  const asignarIdiomes = (e) => {//Evita que se pueda escribir numeros en negativo en el input
+  const asignarIdiomes = (e) => {
     if (e.target.value <= 0) {
-      setIdiomes("");
+      setIdiomes(0);
     } else {
       setIdiomes(e.target.value);
     }
   };
-
-  useEffect(() => {
-    calcularTotal();
-  }, [pagines, idiomes]);
-
-  const calcularTotal = () => {
-    setPrecioTotal((Number(pagines) + Number(idiomes)) * 30 + 500);
-  };
+ 
 
   return (
     <>
