@@ -29,16 +29,15 @@ const Presupost = () => {
   ];
 
   const modificar = (e, indice) => {
-   
     setPrecioTotal(
       e.target.checked
-        ? precioTotal + valores[indice].precio 
+        ? precioTotal + valores[indice].precio
         : precioTotal - valores[indice].precio
     );
+    setPreu(!e.target.cheked && indice === 0 ? 0 : preu);
 
     setOpenPanell(indice === 0 ? !openPanell : openPanell);
   };
-
 
   return (
     <>
@@ -56,8 +55,7 @@ const Presupost = () => {
         </div>
       ))}
 
-      <p>Preu: {precioTotal} €</p>
-      <p>Precio por las paginas (por implementar): {preu} €</p>
+      <p>Preu: {precioTotal+preu} €</p>
     </>
   );
 };
