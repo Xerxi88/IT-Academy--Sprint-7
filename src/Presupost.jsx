@@ -2,11 +2,14 @@ import React, { useEffect } from "react";
 import "./App.css";
 import { useState } from "react";
 import Panell from "./components/Panell";
+import Modal from "./components/Modal";
 
 const Presupost = () => {
   const [precioTotal, setPrecioTotal] = useState(0);
   const [openPanell, setOpenPanell] = useState(false);
   const [preu, setPreu] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
+  const [openModal2, setOpenModal2] = useState(false);
 
   console.log(preu);
 
@@ -41,6 +44,19 @@ const Presupost = () => {
 
   return (
     <>
+      {openModal && (
+        <Modal
+          text="pàgines"
+          setOpenModal={setOpenModal}
+        />
+      )}
+      {openModal2 && (
+        <Modal
+          text="idiomes"
+          setOpenModal={setOpenModal2}
+        />
+      )}
+
       <p>¿Que vols fer?</p>
 
       {valores.map((servicio, indice) => (
@@ -51,11 +67,17 @@ const Presupost = () => {
             onClick={(e) => modificar(e, indice)}
           ></input>
           <label htmlFor={servicio.id}>{servicio.texto}</label>
-          {openPanell && indice === 0 ? <Panell setPreu={setPreu} /> : null}
+          {openPanell && indice === 0 ? (
+            <Panell
+              setPreu={setPreu}
+              setOpenModal={setOpenModal}
+              setOpenModal2={setOpenModal2}
+            />
+          ) : null}
         </div>
       ))}
 
-      <p>Preu: {precioTotal+preu} €</p>
+      <p>Preu: {precioTotal + preu} €</p>
     </>
   );
 };
